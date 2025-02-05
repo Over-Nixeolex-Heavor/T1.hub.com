@@ -4,64 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скрипт</title>
+    <title>T1 Hub - Скрипты</title>
+<meta name="description" content="T1 Hub - разработка скриптов для Doors и TSB.">
+<meta name="keywords" content="Doors и TSB, скрипты, разработка">
     <style>
-        body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background-image: url('https://i.ibb.co/Fbkk9Ld/photo-2024-12-24-15-19-06.jpg'); /* Замените на путь к вашему изображению */
-          background-size: cover; /* Заполняет всю область фона */
-          background-position: center; /* Центрирует изображение */
-          color: white; /* Цвет текста */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
         }
+
         body {
-            display: flex;
-            justify-content: center; /* Центрирование по горизонтали */
-            align-items: center; /* Центрирование по вертикали */
-            height: 100vh; /* Занимает всю высоту экрана */
             margin: 0;
-            background-color: #f0f0f0; /* Цвет фона */
-            font-family: Arial, sans-serif; /* Шрифт */
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://i.ibb.co/Fbkk9Ld/photo-2024-12-24-15-19-06.jpg') center/cover fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
         }
 
         .container {
-            background-color: white; /* Цвет фона контейнера */
-            padding: 20px; /* Отступы внутри контейнера */
-            border-radius: 10px; /* Скругление углов */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
-            width: 300px; /* Ширина контейнера */
-            text-align: center; /* Центрирование текста */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            color: var(--text-dark);
         }
 
         h1 {
-            font-size: 18px; /* Размер заголовка */
-            margin-bottom: 15px; /* Отступ снизу заголовка */
+            color: var(--primary-color);
+            margin: 0 0 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .status-box {
+            background: #f8f9fa;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
         #textInput {
-            width: 100%; /* Ширина текстового поля */
-            height: 100px; /* Высота текстового поля */
-            margin-bottom: 15px; /* Отступ снизу текстового поля */
-            resize: none; /* Отключение изменения размера */
+            width: 100%;
+            height: 120px;
+            border: none;
+            background: transparent;
+            resize: none;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            padding: 0.5rem;
         }
 
-        #copyButton {
-            background-color: #007bff; /* Цвет кнопки */
-            color: white; /* Цвет текста на кнопке */
-            border: none; /* Убираем рамку */
-            padding: 10px 15px; /* Отступы внутри кнопки */
-            border-radius: 5px; /* Скругление углов кнопки */
-            cursor: pointer; /* Указатель при наведении */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        #copyButton:hover {
-            background-color: #0056b3; /* Цвет кнопки при наведении */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
         }
 
-        .footer {
-            margin-top: 20px; /* Отступ сверху для подвала */
-            font-size: 14px; /* Размер шрифта для подвала */
-            color: #555; /* Цвет текста подвала */
+        .btn-primary {
+            background: var(--accent-color);
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #27ae60;
+        }
+
+        .btn-secondary:hover {
+            background: #219150;
+            transform: translateY(-2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            transition: right 0.3s ease;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -69,24 +133,54 @@
 <body>
 
     <div class="container">
-        <h1>Зайди в наш канал в телеграмме</h1>
-        <textarea id="textInput" readonly>-- TSB
+        <h1>🚀 T1 Hub - Скрипты</h1>
+        
+        <div class="status-box">
+            <textarea id="textInput" readonly>-- TSB
 loadstring(game:HttpGet("https://raw.githubusercontent.com/t1hub2/T1_hub_new/refs/heads/main/Brib%20Tsb.lua"))()
 -- Doors
 loadstring(game:HttpGet("https://raw.githubusercontent.com/t1hub2/T1_hub_new/refs/heads/main/Remake.lua", true))()</textarea>
-        <button id="copyButton">Копировать текст</button>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="copyButton">
+                📋 Скопировать скрипт
+            </button>
+            <a href="https://over-nixeolex-heavor.github.io/T1.hub/Status.html" class="btn btn-secondary" target="_blank">
+                🌐 Перейти на сайт
+            </a>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">Текст скопирован!</div>
 
     <script>
-        document.getElementById('copyButton').addEventListener('click', function () {
-            const textToCopy = document.getElementById('textInput').value;
-            navigator.clipboard.writeText(textToCopy).then(function () {
-                alert('Текст скопирован: ' + textToCopy);
-            }, function (err) {
-                console.error('Ошибка при копировании текста: ', err);
-            });
+        const copyButton = document.getElementById('copyButton');
+        const notification = document.getElementById('notification');
+
+        function showNotification() {
+            notification.style.right = '20px';
+            setTimeout(() => {
+                notification.style.right = '-300px';
+            }, 2000);
+        }
+
+        copyButton.addEventListener('click', () => {
+            const text = document.getElementById('textInput').value;
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showNotification();
+                    copyButton.textContent = '✅ Скопировано!';
+                    setTimeout(() => {
+                        copyButton.textContent = '📋 Скопировать скрипт';
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования:', err);
+                    alert('Не удалось скопировать текст');
+                });
         });
     </script>
-
 </body>
 
 </html>
