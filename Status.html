@@ -1,100 +1,199 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-<head>
-  <title>Статус</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="T1 Hub занимается разработкой двух режимов">
-  <meta name="keywords" content="T1 Hub">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T1 Hub - Статус</title>
+    <meta name="description" content="T1 Hub - разработка и поддержка скриптов для GTA5 RP. Гибкие решения и профессиональная поддержка.">
+    <meta name="keywords" content="GTA5 RP, скрипты, разработка, T1 Hub, поддержка">
     <style>
-        body {
-          margin: 0;
-          font-family: Arial, sans-serif;
-          background-image: url('https://i.ibb.co/Fbkk9Ld/photo-2024-12-24-15-19-06.jpg'); /* Замените на путь к вашему изображению */
-          background-size: cover; /* Заполняет всю область фона */
-          background-position: center; /* Центрирует изображение */
-          color: white; /* Цвет текста */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
         }
+
         body {
-            display: flex;
-            justify-content: center; /* Центрирование по горизонтали */
-            align-items: center; /* Центрирование по вертикали */
-            height: 100vh; /* Занимает всю высоту экрана */
             margin: 0;
-            background-color: #f0f0f0; /* Цвет фона */
-            font-family: Arial, sans-serif; /* Шрифт */
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://i.ibb.co/Fbkk9Ld/photo-2024-12-24-15-19-06.jpg') center/cover fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
         }
 
         .container {
-            background-color: white; /* Цвет фона контейнера */
-            padding: 20px; /* Отступы внутри контейнера */
-            border-radius: 10px; /* Скругление углов */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
-            width: 300px; /* Ширина контейнера */
-            text-align: center; /* Центрирование текста */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            color: var(--text-dark);
         }
 
         h1 {
-            font-size: 18px; /* Размер заголовка */
-            margin-bottom: 15px; /* Отступ снизу заголовка */
+            color: var(--primary-color);
+            margin: 0 0 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .status-box {
+            background: #f8f9fa;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
         #textInput {
-            width: 100%; /* Ширина текстового поля */
-            height: 100px; /* Высота текстового поля */
-            margin-bottom: 15px; /* Отступ снизу текстового поля */
-            resize: none; /* Отключение изменения размера */
+            width: 100%;
+            height: 80px;
+            border: none;
+            background: transparent;
+            resize: none;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            padding: 0.5rem;
         }
 
-        #copyButton {
-            background-color: #007bff; /* Цвет кнопки */
-            color: white; /* Цвет текста на кнопке */
-            border: none; /* Убираем рамку */
-            padding: 10px 15px; /* Отступы внутри кнопки */
-            border-radius: 5px; /* Скругление углов кнопки */
-            cursor: pointer; /* Указатель при наведении */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
 
-        #copyButton:hover {
-            background-color: #0056b3; /* Цвет кнопки при наведении */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .footer {
-            margin-top: 20px; /* Отступ сверху для подвала */
-            font-size: 14px; /* Размер шрифта для подвала */
-            color: #555; /* Цвет текста подвала */
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .features-list {
+            text-align: left;
+            padding-left: 1.2rem;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: #27ae60;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: -300px;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            transition: right 0.3s ease;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+                width: 95%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
-
 <body>
-
     <div class="container">
-        <h1>Зайди в наш канал в телеграмме</h1>
-        <textarea id="textInput" readonly>Тсб ❔
+        <h1>🚀 T1 Hub - Статус разработки</h1>
+        
+        <div class="status-box">
+            <textarea id="textInput" readonly>Тсб ❔
 Дорс 🟢</textarea>
-        <div class="footer">
-            Почему нужно выбрать именно нас:
-            <ol>
-                <li>Гибкость и адаптивность: Мы готовы адаптироваться к изменениям и быстро реагировать на ваши пожелания. Наша команда умеет работать в условиях динамично меняющихся требований и сроков.</li>
-                <li>Поддержка: Мы не просто создаем скрипт, но и обеспечиваем его поддержку. Вы всегда можете рассчитывать на нашу помощь, если у вас возникнут вопросы.</li>
-            </ol>
+        </div>
+
+        <div class="button-group">
+            <button class="btn btn-primary" id="copyButton">
+                📋 Скопировать статус
+            </button>
+        </div>
+
+        <div class="features-list">
+            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Преимущества:</h2>
+            <ul>
+                <li>Гибкие решения с адаптацией под изменения требований</li>
+                <li>Круглосуточная техническая поддержка</li>
+                <li>Оптимизированные и стабильные решения</li>
+                <li>Регулярные обновления и улучшения</li>
+                <li>Индивидуальный подход к каждому клиенту</li>
+            </ul>
         </div>
     </div>
 
+    <div class="notification" id="notification">Текст скопирован!</div>
+
     <script>
-        document.getElementById('copyButton').addEventListener('click', function () {
-            const textToCopy = document.getElementById('textInput').value;
-            navigator.clipboard.writeText(textToCopy).then(function () {
-                alert('Текст скопирован: ' + textToCopy);
-            }, function (err) {
-                console.error('Ошибка при копировании текста: ', err);
-            });
+        const copyButton = document.getElementById('copyButton');
+        const notification = document.getElementById('notification');
+
+        function showNotification() {
+            notification.style.right = '20px';
+            setTimeout(() => {
+                notification.style.right = '-300px';
+            }, 2000);
+        }
+
+        copyButton.addEventListener('click', () => {
+            const text = document.getElementById('textInput').value;
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showNotification();
+                    copyButton.textContent = '✅ Скопировано!';
+                    setTimeout(() => {
+                        copyButton.textContent = '📋 Скопировать статус';
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования:', err);
+                    alert('Не удалось скопировать текст');
+                });
         });
     </script>
-
 </body>
-
 </html>
